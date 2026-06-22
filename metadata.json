@@ -1,0 +1,10 @@
+{
+  "name": "QRFlow",
+  "description": "Premium professional QR Code Generator, Scanner, and Data Extractor.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
