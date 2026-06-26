@@ -1,3 +1,5 @@
+import { useUser } from "@clerk/clerk-react";
+import { supabase } from "./lib/supabase";
 import {
   SignedIn,
   SignedOut,
@@ -32,43 +34,84 @@ import ThemeToggle from './components/ThemeToggle';
 import { QRHistoryItem } from './types';
 
 export default function App() {
+const { user } = useUser();
   // Navigation active tab index
   const [activeTab, setActiveTab] = useState<'create' | 'scan' | 'history'>('create');
 
-  // Load history from localStorage safely
-  const [historyItems, setHistoryItems] = useState<QRHistoryItem[]>(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('qrflow_history');
-      if (stored) {
-        try {
-          return JSON.parse(stored);
-        } catch (e) {
-          console.error('Failed to parse local history', e);
-          return [];
-        }
-      }
+
+ const [historyItems, setHistoryItems] = useState<QRHistoryItem[]>([]);
+useEffect(() => {
+  async function loadHistory() {
+    if (!user) return;
+
+    const { data, error } = await supabase
+      .from("qr_history")
+      .select("*")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false });
+
+    if (!error && data) {
+      setHistoryItems(data);
     }
-    return [];
+  }
+
+  loadHistory();
+}, [user]);
+
+const saveToSupabase = async (item: QRHistoryItem) => {
+  if (!user) return;
+
+  const { error } = await supabase
+    .from("qr_history")
+    .insert([
+  
+    {
+      user_id: user.id,
+      type: item.type,
+      title: item.title,
+      content: item.content,
+      fg_color: item.fgColor,
+      bg_color: item.bgColor,
+      created_at_client: item.createdAt,
+      qr_data_url: item.qrDataUrl,
+      scanned: item.scanned,
+    
+  },
+]);
+
+  if (error) {
+    console.error("Supabase error:", error);
+  }
+};
+
+ 
+
+
+ const handleAddHistory = async (item: QRHistoryItem) => {
+
+  await saveToSupabase(item);
+
+  setHistoryItems((prev) => {
+    const exists = prev.some(
+      (p) =>
+        p.content === item.content &&
+        p.type === item.type &&
+        p.scanned === item.scanned
+    );
+
+    if (exists) {
+      const filtered = prev.filter(
+        (p) =>
+          !(p.content === item.content &&
+            p.type === item.type)
+      );
+      return [item, ...filtered];
+    }
+
+    return [item, ...prev];
   });
-
-  // Sync state data to localStorage
-  useEffect(() => {
-    localStorage.setItem('qrflow_history', JSON.stringify(historyItems));
-  }, [historyItems]);
-
-  const handleAddHistory = (item: QRHistoryItem) => {
-    // Check if duplicate scan/item exists next-to-next, if so, ignore to avoid clutter
-    setHistoryItems((prev) => {
-      const exists = prev.some((p) => p.content === item.content && p.type === item.type && p.scanned === item.scanned);
-      if (exists) {
-        // Just move to the top of list (by deleting old and prepending)
-        const filtered = prev.filter((p) => !(p.content === item.content && p.type === item.type));
-        return [item, ...filtered];
-      }
-      return [item, ...prev];
-    });
-  };
-
+};
+    
   const handleDeleteItem = (id: string) => {
     setHistoryItems((prev) => prev.filter((item) => item.id !== id));
   };
@@ -305,7 +348,7 @@ export default function App() {
               </div>
               <div>
                 <span className="block text-[9px] uppercase font-bold tracking-wider text-slate-400 leading-none mb-1">Vault Status</span>
-                <span className="text-xs text-slate-600 dark:text-slate-300 font-bold">Secure (Offline)</span>
+                <span className="text-xs text-slate-600 dark:text-slate-300 font-bold">Secure Cloud Storage</span>
               </div>
             </div>
 
