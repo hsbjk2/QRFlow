@@ -216,13 +216,13 @@ export default function App() {
 
   <SignedOut>
    <SignInButton mode="modal">
-  <button className="inline-flex py-1.5 px-4 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold">
+  <button className="inline-flex items-center justify-center px-2.5 py-1 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] sm:px-4 sm:py-2 sm:text-xs font-semibold transition-all">
     Login
   </button>
 </SignInButton>
 
 <SignUpButton mode="modal">
-  <button className="inline-flex py-1.5 px-4 rounded-full border border-indigo-600 text-indigo-600 dark:text-indigo-400 text-xs font-semibold">
+  <button className="inline-flex items-center justify-center px-2.5 py-1 rounded-full border border-indigo-600 text-indigo-600 dark:text-indigo-400 text-[10px] sm:px-4 sm:py-2 sm:text-xs font-semibold transition-all">
     Sign Up
   </button>
 </SignUpButton>
