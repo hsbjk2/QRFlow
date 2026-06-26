@@ -215,17 +215,17 @@ export default function App() {
           <div className="flex items-center gap-4">
 
   <SignedOut>
-    <SignInButton mode="modal">
-      <button className="hidden sm:inline-flex py-1.5 px-4 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition-all">
-        Login
-      </button>
-    </SignInButton>
+   <SignInButton mode="modal">
+  <button className="inline-flex py-1.5 px-4 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold">
+    Login
+  </button>
+</SignInButton>
 
-    <SignUpButton mode="modal">
-      <button className="hidden sm:inline-flex py-1.5 px-4 rounded-full border border-indigo-600 text-indigo-600 dark:text-indigo-400 text-xs font-semibold transition-all">
-        Sign Up
-      </button>
-    </SignUpButton>
+<SignUpButton mode="modal">
+  <button className="inline-flex py-1.5 px-4 rounded-full border border-indigo-600 text-indigo-600 dark:text-indigo-400 text-xs font-semibold">
+    Sign Up
+  </button>
+</SignUpButton>
   </SignedOut>
 
   <SignedIn>
