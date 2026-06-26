@@ -1,3 +1,10 @@
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/clerk-react";
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -206,15 +213,37 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4">
-            <ThemeToggle />
-            <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block" />
-            <a
-              href="mailto:support.hsbjk@gmail.com"
-              className="hidden sm:inline-flex py-1.5 px-3 rounded-full border border-slate-200 dark:border-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold text-slate-650 dark:text-slate-300 transition-all duration-300 shadow-sm"
-            >
-              Support Helpdesk
-            </a>
-          </div>
+
+  <SignedOut>
+    <SignInButton mode="modal">
+      <button className="hidden sm:inline-flex py-1.5 px-4 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition-all">
+        Login
+      </button>
+    </SignInButton>
+
+    <SignUpButton mode="modal">
+      <button className="hidden sm:inline-flex py-1.5 px-4 rounded-full border border-indigo-600 text-indigo-600 dark:text-indigo-400 text-xs font-semibold transition-all">
+        Sign Up
+      </button>
+    </SignUpButton>
+  </SignedOut>
+
+  <SignedIn>
+    <UserButton />
+  </SignedIn>
+
+  <ThemeToggle />
+
+  <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block" />
+
+  <a
+    href="mailto:support.hsbjk@gmail.com"
+    className="hidden sm:inline-flex py-1.5 px-3 rounded-full border border-slate-200 dark:border-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold text-slate-650 dark:text-slate-300 transition-all duration-300 shadow-sm"
+  >
+    Support Helpdesk
+  </a>
+
+</div>
         </header>
 
         {/* Main Content Body */}
@@ -391,8 +420,6 @@ export default function App() {
               <a href="#privacy" className="hover:text-indigo-500 transition-colors">Privacy Shield</a>
               <a href="mailto:support.hsbjk@gmail.com" className="hover:text-indigo-500 transition-colors">Support Helpdesk</a>
               <a href="#docs" className="hover:text-indigo-500 transition-colors">Offline API Documentation</a>
-              <a href="https://hsbjk.in" className="hover:text-indigo-500 transition-colors">HSBJK Official Page</a>
-
             </div>
           </div>
         </footer>
