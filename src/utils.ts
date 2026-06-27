@@ -176,3 +176,4 @@ export function generateSMSString(phone: string, body?: string): string {
   const query = body ? `?body=${encodeURIComponent(body)}` : '';
   return `sms:${phone}${query}`;
 }
+

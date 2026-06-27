@@ -292,3 +292,4 @@ export default function QRHistory({ items, onClearAll, onDeleteItem }: QRHistory
     </div>
   );
 }
+

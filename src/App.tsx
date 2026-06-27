@@ -472,3 +472,4 @@ const saveToSupabase = async (item: QRHistoryItem) => {
   );
 }
 
+

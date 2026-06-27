@@ -569,3 +569,4 @@ export default function QRScanner({ onAddHistory }: QRScannerProps) {
     </div>
   );
 }
+

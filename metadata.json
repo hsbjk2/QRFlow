@@ -1,5 +1,5 @@
 {
-  "name": "QRFlow",
+  "name": "QRCloud",
   "description": "Premium professional QR Code Generator, Scanner, and Data Extractor.",
   "requestFramePermissions": [
     "camera"
@@ -8,3 +8,4 @@
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
   ]
 }
+

@@ -95,17 +95,17 @@ export default function QRGenerator({ onAddHistory }: QRGeneratorProps) {
 
   // Input states
   const [url, setUrl] = useState('https://google.com');
-  const [text, setText] = useState('Hello from QRFlow!');
-  const [wifiSsid, setWifiSsid] = useState('QRFlow_Network');
+  const [text, setText] = useState('Hello from QRCloud!');
+  const [wifiSsid, setWifiSsid] = useState('QRCloud_Network');
   const [wifiPass, setWifiPass] = useState('secret_password');
   const [wifiType, setWifiType] = useState('WPA');
   const [wifiHidden, setWifiHidden] = useState(false);
-  const [emailTo, setEmailTo] = useState('contact@qrflow.example.com');
-  const [emailSubject, setEmailSubject] = useState('Inquiry via QRFlow');
+  const [emailTo, setEmailTo] = useState('contact@qrCloud.example.com');
+  const [emailSubject, setEmailSubject] = useState('Inquiry via QRCloud');
   const [emailBody, setEmailBody] = useState('Hi, I scanned your premium QR code and wanted to connect!');
   const [phoneNum, setPhoneNum] = useState('+14155552671');
   const [smsPhone, setSmsPhone] = useState('+14155552671');
-  const [smsBody, setSmsBody] = useState('Sent instantly via my QRFlow dynamic code.');
+  const [smsBody, setSmsBody] = useState('Sent instantly via my QRCloud dynamic code.');
   
   // Social media link builder
   const [socialPlatform, setSocialPlatform] = useState<'instagram' | 'linkedin' | 'github' | 'twitter'>('instagram');
@@ -649,14 +649,14 @@ export default function QRGenerator({ onAddHistory }: QRGeneratorProps) {
 
           // Trigger download
           const link = document.createElement('a');
-          link.download = `qrflow-social-${socialPlatform}-${Date.now()}.png`;
+          link.download = `QRCloud-social-${socialPlatform}-${Date.now()}.png`;
           link.href = tempCanvas.toDataURL('image/png');
           link.click();
         }
       } else {
         // Standard plain QR code download
         const link = document.createElement('a');
-        link.download = `qrflow-${activeTab}-${Date.now()}.png`;
+        link.download = `qrcloud-${activeTab}-${Date.now()}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
       }
@@ -667,7 +667,7 @@ export default function QRGenerator({ onAddHistory }: QRGeneratorProps) {
       
       // Let's create an elegant download package containing the path or rendering
       const link = document.createElement('a');
-      link.download = `qrflow-${activeTab}-${Date.now()}.svg`;
+      link.download = `qrcloud-${activeTab}-${Date.now()}.svg`;
       
       // Generating XML structure of standard vector QR
       QRCode.toString(rawContent, {
@@ -1458,3 +1458,4 @@ export default function QRGenerator({ onAddHistory }: QRGeneratorProps) {
     </div>
   );
 }
+
